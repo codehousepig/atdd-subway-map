@@ -26,7 +26,7 @@ public class LineService {
 		Line saveLine = lineRepository.save(new Line(lineRequest.getName(), lineRequest.getColor()));
 
 		Section newSection = sectionService.saveSection(saveLine, new SectionCreateRequest(lineRequest.getDownStationsId(), lineRequest.getUpStationsId(), lineRequest.getDistance()));
-		saveLine.getSections().addSection(newSection);
+		saveLine.addSection(newSection);
 		return createLineResponse(saveLine);
 	}
 

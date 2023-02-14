@@ -27,7 +27,7 @@ public class SectionService {
 	public SectionResponse addSection(Long lineId, SectionCreateRequest sectionRequest) {
 		Line findLine = lineRepository.findById(lineId).orElseThrow(() -> new NullPointerException("Line doesn't exist"));
 		Section newSection = saveSection(findLine, sectionRequest);
-		return createSectionResponse(findLine.getSections().addSection(newSection));
+		return createSectionResponse(findLine.addSection(newSection));
 	}
 
 	@Transactional
@@ -35,7 +35,7 @@ public class SectionService {
 		Station upStation = stationRepository.findById(sectionRequest.getUpStationId()).orElseThrow(() -> new NullPointerException("Station doesn't exist"));
 		Station downStation = stationRepository.findById(sectionRequest.getDownStationId()).orElseThrow(() -> new NullPointerException("Station doesn't exist"));
 
-		Section section = validCreateSection(line.getSections(), upStation, downStation, sectionRequest.getDistance());
+		Section section = createSection(line.getSections(), upStation, downStation, sectionRequest.getDistance());
 		return sectionRepository.save(section);
 	}
 

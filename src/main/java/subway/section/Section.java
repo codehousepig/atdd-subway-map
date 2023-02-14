@@ -30,7 +30,7 @@ public class Section {
 	public Section() {
 	}
 
-	public static Section validCreateSection(Sections sections, Station upStation, Station downStation, int distance) {
+	public static Section createSection(Sections sections, Station upStation, Station downStation, int distance) {
 		if (sections.getLastSection() == null) {
 			return new Section(upStation, downStation, distance);
 		}

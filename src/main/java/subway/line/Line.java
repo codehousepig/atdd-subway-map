@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import subway.section.Section;
 import subway.section.Sections;
 
 @Entity
@@ -24,7 +25,7 @@ public class Line {
 	private String color;
 
 	@Embedded
-	private Sections sections = new Sections();
+	private Sections sections;
 
 	public Line() {
 	}
@@ -32,11 +33,16 @@ public class Line {
 	public Line(String name, String color) {
 		this.name = name;
 		this.color = color;
+		this.sections = new Sections();
 	}
 
 	public void updateLine(String name, String color) {
 		this.name = name;
 		this.color = color;
+	}
+
+	public Section addSection(Section section) {
+		return this.sections.addSection(section);
 	}
 
 	public Long getId() {
